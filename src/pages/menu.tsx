@@ -1,7 +1,30 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import CoffeeVerseEffects from "@/components/CoffeeVerseEffects";
+import { useState, useEffect } from "react";
 
 export default function Menu() {
+  const [scrollY, setScrollY] = useState(0);
+  const [favoriteItems, setFavoriteItems] = useState<Set<number>>(new Set());
+
+  useEffect(() => {
+    const handleScroll = () => setScrollY(window.scrollY);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const toggleFavorite = (index: number, itemName: string) => {
+    const newFavorites = new Set(favoriteItems);
+    if (newFavorites.has(index)) {
+      newFavorites.delete(index);
+      alert(`💔 Removed ${itemName} from favorites`);
+    } else {
+      newFavorites.add(index);
+      alert(`❤️ Added ${itemName} to favorites! ✨`);
+    }
+    setFavoriteItems(newFavorites);
+  };
+
   const coffeeItems = [
     { name: "Espresso", price: 160, description: "Rich, bold, and concentrated coffee shot", image: "https://images.unsplash.com/photo-1510707577719-ae7c14805e3a?w=300&h=200&fit=crop&crop=center" },
     { name: "Doppio (Double Espresso)", price: 160, description: "Double shot of our signature espresso", image: "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=300&h=200&fit=crop&crop=center" },
@@ -40,7 +63,7 @@ export default function Menu() {
   ];
 
   const MenuSection = ({ title, items, testId }: { title: string; items: typeof coffeeItems; testId: string }) => (
-    <div className="mb-16" data-testid={testId}>
+    <div className="mb-16 parallax-section" data-testid={testId} style={{transform: `translateY(${scrollY * 0.02}px)`}}>
       <div className="flex items-center justify-center mb-8">
         <h2 className="font-bold text-4xl text-orange-900">
           {title}
@@ -48,7 +71,7 @@ export default function Menu() {
       </div>
       <div className="grid md:grid-cols-2 gap-6">
         {items.map((item, index) => (
-          <div key={index} className="bg-white rounded-2xl shadow-lg p-6 hover:shadow-xl hover:scale-[1.02] transition-all duration-300 group overflow-hidden" data-testid={`menu-item-${index}`}>
+          <div key={index} className="bg-white rounded-2xl shadow-lg p-6 hover:shadow-xl hover:scale-[1.02] transition-all duration-300 group overflow-hidden menu-item-hover card-hover-effect" data-testid={`menu-item-${index}`}>
             <div className="relative h-48 mb-4 overflow-hidden rounded-xl">
               <img 
                 src={item.image} 
@@ -59,24 +82,33 @@ export default function Menu() {
                 }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
-              <div className="absolute top-4 right-4 bg-orange-500 text-white px-3 py-1 rounded-full font-bold text-lg">
+              <div className="absolute top-4 right-4 bg-gradient-to-r from-orange-500 to-yellow-500 text-white px-3 py-1 rounded-full font-bold text-lg animate-pulse-glow">
                 ₹{item.price}
               </div>
+              <div className="absolute top-4 left-4 text-2xl opacity-50 animate-steam">☕</div>
             </div>
             <div className="flex justify-between items-start mb-3">
-              <h3 className="font-semibold text-xl text-orange-900 group-hover:text-orange-600 transition-colors">
+              <h3 className="font-semibold text-xl text-orange-900 group-hover:text-gradient transition-colors">
                 {item.name}
               </h3>
+              <button 
+                className={`p-1 rounded-full transition-all duration-300 hover:scale-125 ${
+                  favoriteItems.has(index) ? 'text-red-500 animate-pulse' : 'text-gray-400 hover:text-red-500'
+                }`}
+                onClick={() => toggleFavorite(index, item.name)}
+              >
+                ❤️
+              </button>
             </div>
             <p className="text-gray-600 leading-relaxed group-hover:text-gray-800 transition-colors mb-4">
               {item.description}
             </p>
             <div className="pt-4 border-t border-orange-100">
               <div className="flex justify-between items-center">
-                <span className="text-sm text-green-600 font-medium">Fresh • Made to Order</span>
+                <span className="text-sm text-green-600 font-medium">Fresh • Made to Order ✨</span>
                 <div className="flex space-x-1">
                   {[...Array(5)].map((_, i) => (
-                    <svg key={i} className="w-4 h-4 text-orange-400" fill="currentColor" viewBox="0 0 20 20">
+                    <svg key={i} className="w-4 h-4 text-orange-400 hover:text-yellow-500 transition-colors cursor-pointer hover:animate-bounce" fill="currentColor" viewBox="0 0 20 20">
                       <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                     </svg>
                   ))}
@@ -91,15 +123,17 @@ export default function Menu() {
 
   return (
     <>
+      <CoffeeVerseEffects />
       <title>Menu - Iteeha Coffee | Coffee, Food & Artisanal Teas in Mumbai</title>
       <meta name="description" content="Explore Iteeha Coffee's menu featuring specialty coffee, artisanal teas, fresh sandwiches, and baked goods. Cost for two: ₹500-1050. Basic but Beautiful." />
       
       <Navigation />
       
       {/* Hero Section */}
-      <section className="pt-24 pb-16 bg-gradient-to-br from-orange-50 via-orange-100 to-orange-200 relative overflow-hidden" data-testid="menu-hero">
+      <section className="pt-24 pb-16 bg-gradient-to-br from-orange-50 via-orange-100 to-orange-200 relative overflow-hidden parallax-section" data-testid="menu-hero" style={{transform: `translateY(${scrollY * 0.1}px)`}}>
         <div className="absolute top-10 left-10 w-32 h-32 bg-orange-400 rounded-full opacity-10 animate-bounce"></div>
-        <div className="absolute bottom-10 right-10 w-48 h-48 bg-green-500 rounded-full opacity-10"></div>
+        <div className="absolute bottom-10 right-10 w-48 h-48 bg-green-500 rounded-full opacity-10 animate-float"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-8xl opacity-5 animate-spin" style={{animationDuration: '20s'}}>☕</div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="text-center">
             <div className="mb-8">
@@ -112,7 +146,7 @@ export default function Menu() {
                 }}
               />
             </div>
-            <h1 className="font-bold text-6xl md:text-7xl text-orange-900 mb-6" data-testid="menu-hero-title">
+            <h1 className="font-bold text-6xl md:text-7xl text-orange-900 mb-6 text-gradient animate-shimmer" data-testid="menu-hero-title">
               Our Menu
             </h1>
             <p className="text-xl text-orange-800 max-w-3xl mx-auto mb-8" data-testid="menu-hero-subtitle">

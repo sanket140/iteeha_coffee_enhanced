@@ -8,10 +8,20 @@
   --espresso: hsl(25, 35%, 18%);
   --latte: hsl(40, 70%, 92%);
   --cream: hsl(48, 100%, 97%);
-  --sage: hsl(120, 25%, 65%);
-  --blush: hsl(350, 80%, 85%);
-  --caramel: hsl(25, 95%, 65%);
-  --foam: hsl(45, 50%, 97%);
+  --sage: hsl(120, 35%, 60%);
+  --blush: hsl(350, 85%, 80%);
+  --caramel: hsl(25, 98%, 62%);
+  --foam: hsl(45, 60%, 96%);
+  
+  /* Enhanced vibrant coffee verse colors */
+  --coffee-bean: hsl(30, 45%, 25%);
+  --golden-brew: hsl(35, 85%, 65%);
+  --mocha-dream: hsl(20, 60%, 40%);
+  --steam-white: hsl(0, 0%, 98%);
+  --earth-brown: hsl(25, 50%, 30%);
+  --sunset-orange: hsl(15, 90%, 70%);
+  --forest-green: hsl(140, 40%, 55%);
+  --lavender-mist: hsl(280, 30%, 85%);
   
   --font-sans: 'Inter', sans-serif;
   --font-display: 'Playfair Display', serif;
@@ -40,9 +50,12 @@
     @apply font-sans antialiased bg-latte text-espresso;
     font-family: var(--font-sans);
     background-image: 
-      radial-gradient(circle at 1px 1px, var(--caramel) 1px, transparent 0);
-    background-size: 24px 24px;
+      radial-gradient(circle at 1px 1px, var(--caramel) 1px, transparent 0),
+      radial-gradient(circle at 50px 50px, var(--golden-brew) 0.5px, transparent 0),
+      linear-gradient(45deg, transparent 49%, var(--foam) 50%, transparent 51%);
+    background-size: 24px 24px, 80px 80px, 120px 120px;
     background-attachment: fixed;
+    overflow-x: hidden;
   }
 
   h1, h2, h3, h4 {
@@ -50,14 +63,54 @@
   }
 
   .doodle-bg {
-    background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20,30 Q40,15 60,30 T100,30 M10,70 Q30,55 50,70 T90,70' stroke='%23d9b38c' fill='none' stroke-width='2' opacity='0.1'/%3E%3C/svg%3E");
-    background-size: var(--doodle-size) var(--doodle-size);
+    background-image: 
+      url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20,30 Q40,15 60,30 T100,30 M10,70 Q30,55 50,70 T90,70' stroke='%23d9b38c' fill='none' stroke-width='2' opacity='0.15'/%3E%3C/svg%3E"),
+      url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='15' cy='15' r='3' fill='%23f4a261' opacity='0.1'/%3E%3Ccircle cx='45' cy='45' r='2' fill='%23e76f51' opacity='0.1'/%3E%3C/svg%3E");
+    background-size: var(--doodle-size) var(--doodle-size), 60px 60px;
+    position: relative;
+  }
+  
+  .doodle-bg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent 30%, var(--foam) 50%, transparent 70%);
+    opacity: 0.3;
+    pointer-events: none;
   }
 }
 
 @layer components {
   .btn-primary {
-    @apply bg-caramel text-white px-6 py-3 rounded-full font-medium hover:bg-espresso transition-all duration-300 hover:scale-105 hover:shadow-lg;
+    @apply bg-caramel text-white px-6 py-3 rounded-full font-medium transition-all duration-300 hover:scale-105 hover:shadow-lg;
+    background: linear-gradient(135deg, var(--caramel) 0%, var(--golden-brew) 100%);
+    box-shadow: 0 4px 15px rgba(244, 162, 97, 0.3);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+  }
+  
+  .btn-primary:hover::before {
+    left: 100%;
+  }
+  
+  .btn-primary:hover {
+    background: linear-gradient(135deg, var(--golden-brew) 0%, var(--sunset-orange) 100%);
+    transform: scale(1.05) translateY(-2px);
+    box-shadow: 0 8px 25px rgba(244, 162, 97, 0.5);
   }
   
   .btn-secondary {
@@ -65,7 +118,14 @@
   }
   
   .coffee-card {
-    @apply bg-foam rounded-2xl p-6 shadow-lg border-2 border-latte transition-all duration-300 hover:shadow-xl hover:-translate-y-1;
+    @apply bg-foam rounded-2xl p-6 shadow-lg border-2 border-latte transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 hover:rotate-1;
+    background: linear-gradient(135deg, var(--foam) 0%, var(--cream) 100%);
+    backdrop-filter: blur(10px);
+  }
+  
+  .coffee-card:hover {
+    border-color: var(--caramel);
+    box-shadow: 0 20px 40px rgba(244, 162, 97, 0.3), 0 0 0 1px rgba(244, 162, 97, 0.2);
   }
   
   .wavy-divider {
@@ -74,7 +134,15 @@
   }
   
   .doodle-icon {
-    @apply w-12 h-12 p-2 bg-blush rounded-full flex items-center justify-center;
+    @apply w-12 h-12 p-2 bg-blush rounded-full flex items-center justify-center transition-all duration-300;
+    background: linear-gradient(135deg, var(--blush), var(--lavender-mist));
+    box-shadow: 0 4px 15px rgba(244, 162, 97, 0.2);
+  }
+  
+  .doodle-icon:hover {
+    transform: scale(1.1) rotate(10deg);
+    box-shadow: 0 8px 25px rgba(244, 162, 97, 0.4);
+    background: linear-gradient(135deg, var(--caramel), var(--golden-brew));
   }
 }
 
@@ -124,6 +192,236 @@
   }
 }
 
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(244, 162, 97, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(244, 162, 97, 0.8), 0 0 60px rgba(244, 162, 97, 0.4);
+  }
+}
+
+@keyframes coffee-beans {
+  0% {
+    transform: translateY(-100vh) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@keyframes steam-rise {
+  0% {
+    transform: translateY(0) scale(1) rotate(0deg);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translateY(-30px) scale(1.2) rotate(5deg);
+    opacity: 0.4;
+  }
+  100% {
+    transform: translateY(-60px) scale(1.5) rotate(-3deg);
+    opacity: 0;
+  }
+}
+
+@keyframes text-shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+@keyframes card-hover {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  100% {
+    transform: translateY(-8px) rotate(1deg);
+  }
+}
+
 .animate-float {
   animation: float 3s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.animate-coffee-beans {
+  animation: coffee-beans 8s linear infinite;
+}
+
+.animate-steam {
+  animation: steam-rise 3s ease-out infinite;
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  background-size: 200% 100%;
+  animation: text-shimmer 3s ease-in-out infinite;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.card-hover-effect {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-hover-effect:hover {
+  animation: card-hover 0.3s ease-out forwards;
+}
+
+/* Coffee verse special effects */
+.coffee-beans-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.falling-bean {
+  position: absolute;
+  width: 8px;
+  height: 12px;
+  background: var(--coffee-bean);
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  opacity: 0.6;
+}
+
+.steam-effect {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  filter: blur(1px);
+}
+
+.parallax-section {
+  transform-style: preserve-3d;
+  transition: transform 0.1s ease-out;
+}
+
+.easter-egg {
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.easter-egg:hover {
+  transform: scale(1.1) rotate(5deg);
+  filter: hue-rotate(180deg);
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, var(--caramel), var(--golden-brew), var(--sunset-orange));
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-shift 4s ease-in-out infinite;
+}
+
+@keyframes gradient-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.smooth-scroll {
+  scroll-behavior: smooth;
+}
+
+/* Interactive menu item effects */
+.menu-item-hover {
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
+}
+
+.menu-item-hover::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(244, 162, 97, 0.1), transparent);
+  transition: left 0.6s ease;
+}
+
+.menu-item-hover:hover::before {
+  left: 100%;
+}
+
+.menu-item-hover:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 15px 35px rgba(244, 162, 97, 0.2);
+}
+
+/* Coffee cup steam animation */
+.coffee-steam {
+  position: relative;
+}
+
+.coffee-steam::after {
+  content: '☁️';
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  opacity: 0.6;
+  animation: steam-rise 2s ease-in-out infinite;
+}
+
+/* Magical sparkles */
+@keyframes sparkle {
+  0%, 100% {
+    opacity: 0;
+    transform: scale(0.5) rotate(0deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1) rotate(180deg);
+  }
+}
+
+.sparkle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: radial-gradient(circle, var(--golden-brew), transparent);
+  border-radius: 50%;
+  animation: sparkle 2s ease-in-out infinite;
+}
+
+.sparkle:nth-child(2) {
+  animation-delay: 0.5s;
+}
+
+.sparkle:nth-child(3) {
+  animation-delay: 1s;
+}
+
+.sparkle:nth-child(4) {
+  animation-delay: 1.5s;
 }

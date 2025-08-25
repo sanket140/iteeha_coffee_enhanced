@@ -1,20 +1,33 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu, Coffee, Bean, Croissant, Leaf } from "lucide-react";
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
-    <nav className="fixed top-0 w-full bg-cream/95 backdrop-blur-md z-50 shadow-lg">
+    <nav className={`fixed top-0 w-full backdrop-blur-md z-50 transition-all duration-300 ${
+      scrolled 
+        ? 'bg-cream/95 shadow-lg border-b border-caramel/20' 
+        : 'bg-cream/80 shadow-md'
+    }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           <div className="flex-shrink-0 flex items-center group">
-            <div className="doodle-icon mr-3 bounce">
-              <Coffee className="text-espresso w-6 h-6" />
+            <div className="doodle-icon mr-3 bounce hover:animate-pulse-glow cursor-pointer coffee-steam" onClick={() => alert('☕ Welcome to Iteeha Coffee Verse! ✨')}>
+              <Coffee className="text-espresso w-6 h-6 group-hover:animate-spin" />
             </div>
-            <span className="font-display font-bold text-3xl text-espresso" 
+            <span className="font-display font-bold text-3xl text-gradient hover:animate-shimmer cursor-pointer transition-all duration-300" 
                   style={{ textShadow: "2px 2px 0px rgba(155, 109, 80, 0.2)" }}>
               Iteeha
             </span>
@@ -25,21 +38,21 @@ export default function Navigation() {
             <div className="ml-10 flex items-baseline space-x-8">
               <a 
                 href="/"
-                className="font-heading font-medium text-espresso hover:text-caramel transition-all duration-300 hover:-translate-y-0.5 flex items-center"
+                className="font-heading font-medium text-espresso hover:text-caramel transition-all duration-300 hover:-translate-y-0.5 flex items-center group"
               >
-                <Bean className="mr-1 w-4 h-4" /> Home
+                <Bean className="mr-1 w-4 h-4 group-hover:animate-bounce" /> Home
               </a>
               <a 
                 href="/about"
-                className="font-heading font-medium text-espresso hover:text-caramel transition-all duration-300 hover:-translate-y-0.5 flex items-center"
+                className="font-heading font-medium text-espresso hover:text-caramel transition-all duration-300 hover:-translate-y-0.5 flex items-center group"
               >
-                <Leaf className="mr-1 w-4 h-4" /> About
+                <Leaf className="mr-1 w-4 h-4 group-hover:animate-wiggle" /> About
               </a>
               <a 
                 href="/menu"
-                className="font-heading font-medium text-espresso hover:text-caramel transition-all duration-300 hover:-translate-y-0.5 flex items-center"
+                className="font-heading font-medium text-espresso hover:text-caramel transition-all duration-300 hover:-translate-y-0.5 flex items-center group"
               >
-                <Croissant className="mr-1 w-4 h-4" /> Menu
+                <Croissant className="mr-1 w-4 h-4 group-hover:animate-spin" /> Menu
               </a>
               <a 
                 href="/gallery"
@@ -61,9 +74,9 @@ export default function Navigation() {
               </a>
               <a 
                 href="/order-landing" 
-                className="btn-primary flex items-center"
+                className="btn-primary flex items-center group coffee-steam"
               >
-                <Coffee className="mr-2 w-4 h-4" /> Order Now
+                <Coffee className="mr-2 w-4 h-4 group-hover:animate-spin" /> Order Now
               </a>
             </div>
           </div>
