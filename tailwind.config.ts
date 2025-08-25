@@ -5,15 +5,33 @@ export default {
   content: ["./index.html", "./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
+      borderRadius: {
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)",
+      },
+      fontFamily: {
+        sans: ["var(--font-sans)"],
+        display: ["var(--font-display)"],
+        heading: ["var(--font-heading)"],
+        subheading: ["var(--font-subheading)"],
+        playful: ["var(--font-playful)"],
+      },
       colors: {
+        // Updated color palette according to guidelines
+        "deep-coffee-brown": "var(--deep-coffee-brown)",
+        "creamy-latte": "var(--creamy-latte)",
+        "caramel": "var(--caramel)",
+        "mint-green": "var(--mint-green)",
+        "cherry-red": "var(--cherry-red)",
+        // Legacy colors for compatibility
         espresso: "var(--espresso)",
         latte: "var(--latte)",
         cream: "var(--cream)",
         sage: "var(--sage)",
         blush: "var(--blush)",
-        caramel: "var(--caramel)",
         foam: "var(--foam)",
-        border: "var(--latte)", // Add border color definition
+        border: "var(--latte)",
         // Coffee theme colors for compatibility
         'coffee-dark': '#2C1810',
         'coffee-brown': '#4B3621',
@@ -24,17 +42,6 @@ export default {
         // Modern accent colors
         'warm-peach': '#FFB5A7',
         'soft-rose': '#F4C2C2',
-        'mint-green': '#96CEB4',
-      },
-      borderRadius: {
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
-      },
-      fontFamily: {
-        sans: ["var(--font-sans)"],
-        display: ["var(--font-display)"],
-        heading: ["var(--font-heading)"],
       },
       keyframes: {
         bounce: {

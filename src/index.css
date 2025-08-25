@@ -1,17 +1,24 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700;800&family=Lobster&family=Pacifico&family=Amatic+SC:wght@400;700&family=Raleway:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --espresso: hsl(25, 35%, 18%);
-  --latte: hsl(40, 70%, 92%);
-  --cream: hsl(48, 100%, 97%);
-  --sage: hsl(120, 35%, 60%);
+  /* Updated color palette according to guidelines */
+  --deep-coffee-brown: #4B2E2E;
+  --creamy-latte: #F3E5D5;
+  --caramel: #C28E62;
+  --mint-green: #A8E6CF;
+  --cherry-red: #FF4B3E;
+  
+  /* Legacy colors for compatibility */
+  --espresso: #4B2E2E;
+  --latte: #F3E5D5;
+  --cream: #F3E5D5;
+  --sage: #A8E6CF;
   --blush: hsl(350, 85%, 80%);
-  --caramel: hsl(25, 98%, 62%);
-  --foam: hsl(45, 60%, 96%);
+  --foam: #F3E5D5;
   
   /* Enhanced vibrant coffee verse colors */
   --coffee-bean: hsl(30, 45%, 25%);
@@ -23,9 +30,12 @@
   --forest-green: hsl(140, 40%, 55%);
   --lavender-mist: hsl(280, 30%, 85%);
   
-  --font-sans: 'Inter', sans-serif;
-  --font-display: 'Playfair Display', serif;
+  /* Typography according to guidelines */
+  --font-sans: 'Inter', 'Raleway', sans-serif;
   --font-heading: 'Poppins', sans-serif;
+  --font-subheading: 'Lobster', 'Pacifico', cursive;
+  --font-playful: 'Amatic SC', cursive;
+  --font-display: 'Poppins', sans-serif;
   
   --radius: 1.5rem;
   --doodle-size: 40px;
@@ -85,11 +95,13 @@
 
 @layer components {
   .btn-primary {
-    @apply bg-caramel text-white px-6 py-3 rounded-full font-medium transition-all duration-300 hover:scale-105 hover:shadow-lg;
-    background: linear-gradient(135deg, var(--caramel) 0%, var(--golden-brew) 100%);
-    box-shadow: 0 4px 15px rgba(244, 162, 97, 0.3);
+    @apply text-white px-6 py-3 rounded-full font-medium transition-all duration-300 hover:scale-105 hover:shadow-lg;
+    background: linear-gradient(135deg, var(--cherry-red) 0%, #FF6B58 100%);
+    box-shadow: 0 4px 15px rgba(255, 75, 62, 0.3);
     position: relative;
     overflow: hidden;
+    font-family: var(--font-heading);
+    font-weight: 700;
   }
   
   .btn-primary::before {
@@ -99,7 +111,7 @@
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
     transition: left 0.5s;
   }
   
@@ -108,13 +120,23 @@
   }
   
   .btn-primary:hover {
-    background: linear-gradient(135deg, var(--golden-brew) 0%, var(--sunset-orange) 100%);
-    transform: scale(1.05) translateY(-2px);
-    box-shadow: 0 8px 25px rgba(244, 162, 97, 0.5);
+    background: linear-gradient(135deg, #FF6B58 0%, var(--cherry-red) 100%);
+    transform: scale(1.1) translateY(-3px) rotate(2deg);
+    box-shadow: 0 10px 30px rgba(255, 75, 62, 0.6);
   }
   
   .btn-secondary {
-    @apply bg-sage text-white px-6 py-3 rounded-full font-medium hover:bg-espresso transition-all duration-300 hover:scale-105;
+    @apply text-white px-6 py-3 rounded-full font-medium transition-all duration-300 hover:scale-105;
+    background: linear-gradient(135deg, var(--caramel) 0%, var(--golden-brew) 100%);
+    box-shadow: 0 4px 15px rgba(194, 142, 98, 0.3);
+    font-family: var(--font-heading);
+    font-weight: 600;
+  }
+  
+  .btn-secondary:hover {
+    background: linear-gradient(135deg, var(--deep-coffee-brown) 0%, var(--caramel) 100%);
+    transform: scale(1.05) translateY(-2px);
+    box-shadow: 0 8px 25px rgba(194, 142, 98, 0.5);
   }
   
   .coffee-card {
@@ -517,4 +539,184 @@
 
 .animate-wiggle {
   animation: wiggle 2s ease-in-out infinite;
+}
+
+/* Enhanced Coffee Verse Magic */
+.magical-card {
+  @apply bg-gradient-to-br from-cream to-foam rounded-3xl p-8 shadow-2xl border-2;
+  background: linear-gradient(135deg, var(--creamy-latte) 0%, var(--foam) 50%, var(--cream) 100%);
+  border-color: rgba(194, 142, 98, 0.2);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
+}
+
+.magical-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(from 0deg, transparent, var(--mint-green)/10, transparent, var(--caramel)/10, transparent);
+  animation: magical-rotate 8s linear infinite;
+  z-index: -1;
+}
+
+.magical-card:hover {
+  transform: translateY(-10px) scale(1.05) rotate(2deg);
+  box-shadow: 0 25px 50px rgba(194, 142, 98, 0.3), 0 0 0 2px var(--caramel)/30;
+  border-color: var(--mint-green);
+}
+
+@keyframes magical-rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Playful Typography Classes */
+.font-subheading {
+  font-family: var(--font-subheading);
+  font-weight: 400;
+}
+
+.font-playful {
+  font-family: var(--font-playful);
+  font-weight: 700;
+  font-size: 1.2em;
+}
+
+/* Coffee Verse Hero Background */
+.coffee-verse-hero {
+  background: linear-gradient(135deg, 
+    var(--deep-coffee-brown) 0%, 
+    var(--caramel) 25%, 
+    var(--mint-green) 50%, 
+    var(--caramel) 75%, 
+    var(--deep-coffee-brown) 100%);
+  background-size: 400% 400%;
+  animation: gradient-shift 15s ease infinite;
+  position: relative;
+}
+
+.coffee-verse-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M30 30c0-11.046-8.954-20-20-20s-20 8.954-20 20 8.954 20 20 20 20-8.954 20-20zm20 0c0-11.046-8.954-20-20-20s-20 8.954-20 20 8.954 20 20 20 20-8.954 20-20z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+/* Enhanced Interactive Elements */
+.coffee-bean-bounce {
+  animation: bean-bounce 2s ease-in-out infinite;
+}
+
+@keyframes bean-bounce {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-10px) rotate(5deg); }
+  50% { transform: translateY(-5px) rotate(-3deg); }
+  75% { transform: translateY(-8px) rotate(2deg); }
+}
+
+/* Interactive Pet Animation */
+.coffee-pet {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 80px;
+  height: 80px;
+  background: var(--caramel);
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 50;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  animation: pet-idle 3s ease-in-out infinite;
+}
+
+.coffee-pet:hover {
+  transform: scale(1.2) rotate(10deg);
+  background: var(--cherry-red);
+}
+
+@keyframes pet-idle {
+  0%, 100% { transform: translateY(0) rotate(-5deg); }
+  50% { transform: translateY(-5px) rotate(5deg); }
+}
+
+/* Falling Coffee Beans Easter Egg */
+.bean-rain {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 999;
+}
+
+.bean {
+  position: absolute;
+  width: 6px;
+  height: 10px;
+  background: var(--deep-coffee-brown);
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  animation: bean-fall 3s linear infinite;
+}
+
+@keyframes bean-fall {
+  0% {
+    transform: translateY(-100vh) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+/* Steam particles */
+.steam-particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.steam-particle {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  animation: steam-float 4s ease-in-out infinite;
+}
+
+@keyframes steam-float {
+  0% {
+    transform: translateY(100%) scale(0);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+    transform: translateY(80%) scale(1);
+  }
+  80% {
+    opacity: 1;
+    transform: translateY(20%) scale(1.2);
+  }
+  100% {
+    transform: translateY(0%) scale(0);
+    opacity: 0;
+  }
 }
