@@ -1,41 +1,69 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import CoffeeVerseEffects from "@/components/CoffeeVerseEffects";
+import { useState, useEffect } from "react";
 
 export default function About() {
+  const [scrollY, setScrollY] = useState(0);
+  const [magicalClicks, setMagicalClicks] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => setScrollY(window.scrollY);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const handleMagicalClick = () => {
+    setMagicalClicks(prev => prev + 1);
+    if (magicalClicks >= 2) {
+      alert('✨ You discovered our coffee magic! Welcome to the Coffee Verse! ☕✨');
+      setMagicalClicks(0);
+    }
+  };
+
   return (
     <>
+      <CoffeeVerseEffects />
       <title>About Us - Iteeha Coffee | Our Story & Tradition</title>
       <meta name="description" content="Learn about Iteeha Coffee's journey - 'as per tradition' we believe in doing 'Basic but Beautiful'. Discover our philosophy, sourcing practices, and commitment to quality coffee." />
       
       <Navigation />
       
       {/* Hero Section */}
-      <section className="pt-24 pb-16 bg-coffee-light" data-testid="about-hero">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="pt-24 pb-16 coffee-verse-hero immersive-background parallax-section" data-testid="about-hero" style={{transform: `translateY(${scrollY * 0.1}px)`}}>
+        {/* Floating Coffee Elements */}
+        <div className="floating-coffee-elements">
+          <div className="floating-element">☕</div>
+          <div className="floating-element">✨</div>
+          <div className="floating-element">🌿</div>
+          <div className="floating-element">☔</div>
+        </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center">
             <img 
               src="https://iteeha.coffee/images/aboutiteeha.png" 
               alt="About Iteeha" 
-              className="h-20 w-auto mx-auto mb-8"
+              className="h-20 w-auto mx-auto mb-8 magical-hover easter-egg"
               data-testid="about-hero-logo"
+              onClick={handleMagicalClick}
             />
-            <h1 className="font-inter font-bold text-5xl md:text-6xl text-coffee-brown mb-6" data-testid="about-hero-title">
+            <h1 className="font-display font-bold text-5xl md:text-6xl text-gradient immersive-text mb-6 animate-shimmer" data-testid="about-hero-title">
               Our Story
             </h1>
-            <p className="text-xl text-charcoal max-w-3xl mx-auto" data-testid="about-hero-subtitle">
-              Where tradition meets innovation in every carefully crafted cup
+            <p className="text-xl text-white/90 max-w-3xl mx-auto playful-text" data-testid="about-hero-subtitle">
+              Where tradition meets innovation in every carefully crafted cup ✨
             </p>
           </div>
         </div>
       </section>
 
       {/* Main Story Section */}
-      <section className="py-20 bg-white" data-testid="about-story">
+      <section className="py-20 immersive-section parallax-section" data-testid="about-story" style={{transform: `translateY(${scrollY * 0.05}px)`}}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div className="space-y-8">
-              <h2 className="font-inter font-bold text-4xl text-coffee-brown" data-testid="about-who-we-are">
-                Who We Are
+            <div className="space-y-8 magical-hover">
+              <h2 className="font-display font-bold text-4xl text-gradient animate-shimmer" data-testid="about-who-we-are">
+                Who We Are ☕
               </h2>
               
               <div className="prose prose-lg max-w-none" data-testid="about-story-content">
@@ -50,10 +78,10 @@ export default function About() {
                   and traditions are celebrated, shows in our minimal and elegant ambience.
                 </p>
                 
-                <p className="text-charcoal text-lg leading-relaxed mb-6">
-                  <span className="font-semibold text-coffee-brown">"Iteeha"</span> roughly translates to 
+                <p className="text-espresso text-lg leading-relaxed mb-6 playful-text">
+                  <span className="font-semibold text-gradient">"Iteeha"</span> roughly translates to 
                   <em> 'as per tradition'</em>, and keeping that in mind, we adopted the virtue of doing 
-                  <strong> 'Basic but Beautiful'</strong>. We offer light and simple products, but beautifully done.
+                  <strong className="text-gradient"> 'Basic but Beautiful'</strong>. We offer light and simple products, but beautifully done. ✨
                 </p>
                 
                 <p className="text-charcoal text-lg leading-relaxed mb-6">
@@ -70,27 +98,33 @@ export default function About() {
               </div>
             </div>
             
-            <div className="relative">
+            <div className="relative magical-hover">
               <img 
                 src="https://iteeha.coffee/images/aboutimg.png" 
                 alt="Iteeha Coffee Story" 
-                className="rounded-2xl shadow-2xl w-full h-auto"
+                className="rounded-2xl shadow-2xl w-full h-auto transform hover:scale-105 transition-all duration-500"
                 data-testid="about-story-image"
               />
+              <div className="absolute -top-4 -right-4 text-3xl animate-bounce opacity-70 easter-egg" onClick={() => alert('📸 This is where the magic happens! ✨')}>
+                📸
+              </div>
+              <div className="absolute -bottom-4 -left-4 text-2xl animate-pulse opacity-60">
+                ☕
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Values Section */}
-      <section className="py-20 bg-coffee-light" data-testid="about-values">
+      <section className="py-20 coffee-verse-hero parallax-section" data-testid="about-values" style={{transform: `translateY(${scrollY * 0.03}px)`}}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="font-inter font-bold text-4xl md:text-5xl text-coffee-brown mb-6" data-testid="about-values-title">
-              Our Values
+            <h2 className="font-display font-bold text-4xl md:text-5xl text-gradient immersive-text mb-6 animate-shimmer" data-testid="about-values-title">
+              Our Values 🌟
             </h2>
-            <p className="text-charcoal text-lg max-w-2xl mx-auto" data-testid="about-values-subtitle">
-              The principles that guide us in creating exceptional coffee experiences
+            <p className="text-white/90 text-lg max-w-2xl mx-auto playful-text" data-testid="about-values-subtitle">
+              The principles that guide us in creating exceptional coffee experiences ✨
             </p>
           </div>
           

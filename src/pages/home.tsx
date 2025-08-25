@@ -230,6 +230,49 @@ export default function Home() {
       <div className="fixed top-0 left-1/2 transform -translate-x-1/2 text-2xl animate-bounce opacity-20 pointer-events-none" style={{animationDelay: '2s'}}>
         ☕✨☕
       </div>
+
+      {/* Customer Testimonials with Coffee Verse Magic */}
+      <section className="py-24 px-4 md:px-8 coffee-verse-hero parallax-section" style={{transform: `translateY(${scrollY * 0.02}px)`}}>
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="font-display text-4xl md:text-5xl text-gradient mb-6 animate-shimmer">
+              Coffee Stories ☕✨
+            </h2>
+            <p className="text-white/90 text-lg max-w-2xl mx-auto playful-text">
+              What our coffee verse visitors say about their magical experiences
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="magical-card p-8 text-center group">
+              <div className="text-6xl mb-4 animate-bounce">🙋‍♀️</div>
+              <blockquote className="text-espresso italic mb-4 playful-text">
+                "This place feels like stepping into a coffee wonderland! Every sip is pure magic."
+              </blockquote>
+              <div className="text-caramel font-medium">- Sarah M.</div>
+              <div className="text-sm text-sage">Coffee Enthusiast</div>
+            </div>
+            
+            <div className="magical-card p-8 text-center group">
+              <div className="text-6xl mb-4 animate-bounce" style={{animationDelay: '0.5s'}}>🧙‍♂️</div>
+              <blockquote className="text-espresso italic mb-4 playful-text">
+                "The atmosphere here is absolutely enchanting. It's my daily dose of happiness!"
+              </blockquote>
+              <div className="text-caramel font-medium">- Rahul K.</div>
+              <div className="text-sm text-sage">Regular Visitor</div>
+            </div>
+            
+            <div className="magical-card p-8 text-center group">
+              <div className="text-6xl mb-4 animate-bounce" style={{animationDelay: '1s'}}>👩‍💼</div>
+              <blockquote className="text-espresso italic mb-4 playful-text">
+                "Perfect blend of tradition and innovation. Every visit feels like discovering something new!"
+              </blockquote>
+              <div className="text-caramel font-medium">- Priya S.</div>
+              <div className="text-sm text-sage">Business Professional</div>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import CoffeeVerseEffects from "@/components/CoffeeVerseEffects";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -16,14 +17,24 @@ export default function Contact() {
     person: '',
     message: ''
   });
+  const [scrollY, setScrollY] = useState(0);
+  const [magicalSubmission, setMagicalSubmission] = useState(false);
   const { toast } = useToast();
+
+  useEffect(() => {
+    const handleScroll = () => setScrollY(window.scrollY);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    setMagicalSubmission(true);
+    setTimeout(() => setMagicalSubmission(false), 3000);
     // Here you would typically send the form data to your backend
     toast({
-      title: "Message Sent!",
-      description: "Thank you for contacting us. We'll get back to you soon.",
+      title: "✨ Message Sent!",
+      description: "Thank you for contacting us. We'll get back to you soon with some coffee magic! ☕",
     });
     setFormData({ name: '', email: '', phone: '', person: '', message: '' });
   };
@@ -34,20 +45,25 @@ export default function Contact() {
 
   return (
     <>
+      <CoffeeVerseEffects />
       <title>Contact Us - Iteeha Coffee | Mumbai Locations & Hours</title>
       <meta name="description" content="Visit Iteeha Coffee in Mumbai. Find our locations in Mahalaxmi, Lower Parel, and Bandra West. Open 7:30 AM to 11:30 PM daily. Contact us at connect@iteeha.coffee" />
       
       <Navigation />
       
       {/* Hero Section */}
-      <section className="pt-24 pb-16 bg-coffee-light" data-testid="contact-hero">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="pt-24 pb-16 coffee-verse-hero immersive-background parallax-section" data-testid="contact-hero" style={{transform: `translateY(${scrollY * 0.1}px)`}}>
+        {/* Magical Contact Elements */}
+        <div className="absolute top-20 left-10 text-4xl opacity-20 animate-float">📞</div>
+        <div className="absolute bottom-10 right-10 text-3xl opacity-30 animate-bounce">✉️</div>
+        <div className="absolute top-1/2 left-20 text-2xl opacity-15 animate-pulse">💌</div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center">
-            <h1 className="font-inter font-bold text-5xl md:text-6xl text-coffee-brown mb-6" data-testid="contact-hero-title">
-              Contact Us
+            <h1 className="font-display font-bold text-5xl md:text-6xl text-gradient immersive-text mb-6 animate-shimmer" data-testid="contact-hero-title">
+              Contact Us ☕
             </h1>
-            <p className="text-xl text-charcoal max-w-3xl mx-auto" data-testid="contact-hero-subtitle">
-              Come experience the warmth of Iteeha Coffee. We're here to serve you the perfect cup.
+            <p className="text-xl text-white/90 max-w-3xl mx-auto playful-text" data-testid="contact-hero-subtitle">
+              Come experience the warmth of Iteeha Coffee. We're here to serve you the perfect cup. ✨
             </p>
           </div>
         </div>
