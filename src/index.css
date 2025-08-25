@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Quicksand:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --espresso: hsl(25, 35%, 18%);
+  --latte: hsl(40, 70%, 92%);
+  --cream: hsl(48, 100%, 97%);
+  --sage: hsl(120, 25%, 65%);
+  --blush: hsl(350, 80%, 85%);
+  --caramel: hsl(25, 95%, 65%);
+  --foam: hsl(45, 50%, 97%);
+  
+  --font-sans: 'Quicksand', sans-serif;
+  --font-display: 'Dancing Script', cursive;
+  --font-heading: 'Outfit', sans-serif;
+  
+  --radius: 1.5rem;
+  --doodle-size: 40px;
+}
+
+.dark {
+  --espresso: hsl(25, 20%, 25%);
+  --latte: hsl(40, 15%, 30%);
+  --cream: hsl(48, 10%, 20%);
+  --sage: hsl(120, 15%, 45%);
+  --blush: hsl(350, 30%, 45%);
+  --caramel: hsl(25, 50%, 55%);
+  --foam: hsl(45, 15%, 25%);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-latte text-espresso;
+    font-family: var(--font-sans);
+    background-image: 
+      radial-gradient(circle at 1px 1px, var(--caramel) 1px, transparent 0);
+    background-size: 24px 24px;
+    background-attachment: fixed;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-display;
+  }
+
+  .doodle-bg {
+    background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20,30 Q40,15 60,30 T100,30 M10,70 Q30,55 50,70 T90,70' stroke='%23d9b38c' fill='none' stroke-width='2' opacity='0.1'/%3E%3C/svg%3E");
+    background-size: var(--doodle-size) var(--doodle-size);
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-caramel text-white px-6 py-3 rounded-full font-medium hover:bg-espresso transition-all duration-300 hover:scale-105 hover:shadow-lg;
+  }
+  
+  .btn-secondary {
+    @apply bg-sage text-white px-6 py-3 rounded-full font-medium hover:bg-espresso transition-all duration-300 hover:scale-105;
+  }
+  
+  .coffee-card {
+    @apply bg-foam rounded-2xl p-6 shadow-lg border-2 border-latte transition-all duration-300 hover:shadow-xl hover:-translate-y-1;
+  }
+  
+  .wavy-divider {
+    @apply w-full h-12 bg-no-repeat bg-center;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 120'%3E%3Cpath fill='%23f5f0e6' fill-opacity='1' d='M0,64L80,69.3C160,75,320,85,480,80C640,75,800,53,960,48C1120,43,1280,53,1360,58.7L1440,64L1440,0L1360,0C1280,0,1120,0,960,0C800,0,640,0,480,0C320,0,160,0,80,0L0,0Z'%3E%3C/path%3E%3C/svg%3E");
+  }
+  
+  .doodle-icon {
+    @apply w-12 h-12 p-2 bg-blush rounded-full flex items-center justify-center;
+  }
+}
+
+@layer utilities {
+  .text-shadow {
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  .coffee-stain {
+    position: relative;
+    &::after {
+      content: "";
+      @apply absolute bottom-0 right-0 w-24 h-24 bg-no-repeat bg-contain opacity-10;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='%234B3621' d='M30,10 Q50,30 70,10 Q90,40 70,70 Q50,90 30,70 Q10,40 30,10 Z'/%3E%3C/svg%3E");
+    }
+  }
+  
+  .bounce {
+    animation: bounce 3s ease-in-out infinite;
+  }
+  
+  .wiggle {
+    animation: wiggle 1s ease-in-out infinite;
+  }
+}
+
+@keyframes bounce {
+  0%, 100% { 
+    transform: translateY(0) rotate(-1deg);
+  }
+  50% {
+    transform: translateY(-15px) rotate(2deg);
+  }
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(-2deg); }
+  50% { transform: rotate(2deg); }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}

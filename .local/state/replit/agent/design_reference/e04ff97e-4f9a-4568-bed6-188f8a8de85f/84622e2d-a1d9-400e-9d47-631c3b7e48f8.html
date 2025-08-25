@@ -1,0 +1,631 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iteeha Coffee - Coffee. Craft. Conversations.</title>
+    <meta name="description" content="Iteeha Coffee is a sanctuary for all those seeking a comforting cuppa and a moment to pause and reflect. Step in, relax, and let us take care of the rest.">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'coffee-brown': '#8B4513',
+                        'coffee-dark': '#6F3D28',
+                        'coffee-cream': '#F5F5DC',
+                        'coffee-light': '#FDF6E3',
+                        'coffee-gold': '#D2691E',
+                        'charcoal': '#2D2D2D'
+                    },
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                        'source': ['Source Sans Pro', 'sans-serif']
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 1s ease-in-out',
+                        'slide-up': 'slideUp 0.8s ease-out',
+                        'float': 'float 3s ease-in-out infinite'
+                    }
+                }
+            }
+        };
+    </script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, rgba(139, 69, 19, 0.1) 0%, rgba(111, 61, 40, 0.05) 100%);
+        }
+        
+        .coffee-texture {
+            background-image: 
+                radial-gradient(circle at 1px 1px, rgba(139, 69, 19, 0.03) 1px, transparent 0);
+            background-size: 20px 20px;
+        }
+        
+        .smooth-scroll {
+            scroll-behavior: smooth;
+        }
+        
+        .gallery-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .gallery-hover:hover {
+            transform: scale(1.02);
+            box-shadow: 0 25px 50px -12px rgba(139, 69, 19, 0.25);
+        }
+        
+        .nav-shadow {
+            box-shadow: 0 4px 20px rgba(139, 69, 19, 0.1);
+        }
+        
+        /* Lightbox Styles */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 999;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .lightbox.show {
+            display: flex;
+            opacity: 1;
+        }
+        
+        .lightbox-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 8px;
+            animation: lightboxZoom 0.3s ease;
+        }
+        
+        @keyframes lightboxZoom {
+            from { transform: scale(0.8); }
+            to { transform: scale(1); }
+        }
+        
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        
+        .lightbox-close:hover {
+            color: #D2691E;
+        }
+    </style>
+</head>
+
+<body class="font-source text-charcoal bg-white smooth-scroll">
+    <!-- Navigation -->
+    <!-- @COMPONENT: Navigation [sticky header with mobile menu] -->
+    <nav class="fixed top-0 w-full bg-white/95 backdrop-blur-md z-50 nav-shadow" data-mock="true">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex-shrink-0 flex items-center">
+                    <img src="https://iteeha.coffee/images/vfx.png" alt="Iteeha Coffee Logo" class="h-8 w-auto">
+                    <span class="ml-2 font-inter font-bold text-xl text-coffee-brown">Iteeha</span>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#home" class="font-inter font-medium text-charcoal hover:text-coffee-brown transition-colors duration-300">Home</a>
+                        <a href="#story" class="font-inter font-medium text-charcoal hover:text-coffee-brown transition-colors duration-300">Our Story</a>
+                        <a href="#gallery" class="font-inter font-medium text-charcoal hover:text-coffee-brown transition-colors duration-300">Gallery</a>
+                        <a href="#contact" class="font-inter font-medium text-charcoal hover:text-coffee-brown transition-colors duration-300">Contact</a>
+                        <a href="https://order.iteeha.coffee/" class="bg-coffee-brown text-white px-6 py-2 rounded-full font-medium hover:bg-coffee-dark transition-colors duration-300">Order Now</a>
+                    </div>
+                </div>
+                
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-charcoal hover:text-coffee-brown">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Navigation -->
+        <div id="mobile-menu" class="md:hidden bg-white border-t hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="#home" class="block px-3 py-2 text-charcoal hover:text-coffee-brown font-inter">Home</a>
+                <a href="#story" class="block px-3 py-2 text-charcoal hover:text-coffee-brown font-inter">Our Story</a>
+                <a href="#gallery" class="block px-3 py-2 text-charcoal hover:text-coffee-brown font-inter">Gallery</a>
+                <a href="#contact" class="block px-3 py-2 text-charcoal hover:text-coffee-brown font-inter">Contact</a>
+                <a href="https://order.iteeha.coffee/" class="block mx-3 mt-4 bg-coffee-brown text-white px-4 py-2 rounded-full text-center font-medium">Order Now</a>
+            </div>
+        </div>
+    </nav>
+    <!-- @END_COMPONENT: Navigation -->
+
+    <!-- Hero Section -->
+    <!-- @COMPONENT: HeroCarousel [rotating hero sections with smooth transitions] -->
+    <section id="home" class="relative min-h-screen flex items-center coffee-texture">
+        <div class="absolute inset-0 hero-gradient"></div>
+        
+        <!-- Hero Slides -->
+        <div class="hero-slider w-full h-screen relative overflow-hidden">
+            <!-- Slide 1 -->
+            <div class="hero-slide active absolute inset-0 flex items-center">
+                <!-- Modern coffee shop interior with industrial design elements and warm lighting -->
+                <div class="absolute inset-0 bg-cover bg-center bg-no-repeat" style="background-image: url('https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080');"></div>
+                <div class="absolute inset-0 bg-black/40"></div>
+                <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                    <h1 class="font-inter font-bold text-5xl md:text-7xl text-white mb-6 animate-fade-in">
+                        Coffee. Craft. Conversations.
+                    </h1>
+                    <p class="font-source text-xl md:text-2xl text-coffee-cream mb-8 max-w-2xl mx-auto animate-slide-up">
+                        Where tradition meets innovation in every carefully crafted cup
+                    </p>
+                    <a href="https://order.iteeha.coffee/" class="inline-block bg-coffee-gold text-white px-8 py-4 rounded-full font-inter font-semibold text-lg hover:bg-coffee-brown transition-all duration-300 transform hover:scale-105 animate-float">
+                        Order Now
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Slide 2 -->
+            <div class="hero-slide absolute inset-0 flex items-center opacity-0">
+                <!-- Close-up of barista pouring coffee with artistic latte art -->
+                <div class="absolute inset-0 bg-cover bg-center bg-no-repeat" style="background-image: url('https://images.unsplash.com/photo-1447933601403-0c6688de566e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080');"></div>
+                <div class="absolute inset-0 bg-black/40"></div>
+                <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                    <h1 class="font-inter font-bold text-5xl md:text-7xl text-white mb-6">
+                        Step in, relax,
+                    </h1>
+                    <p class="font-source text-xl md:text-2xl text-coffee-cream mb-8 max-w-2xl mx-auto">
+                        Experience the art of coffee making in our welcoming space
+                    </p>
+                    <a href="https://order.iteeha.coffee/" class="inline-block bg-coffee-gold text-white px-8 py-4 rounded-full font-inter font-semibold text-lg hover:bg-coffee-brown transition-all duration-300 transform hover:scale-105">
+                        Order Now
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Slide 3 -->
+            <div class="hero-slide absolute inset-0 flex items-center opacity-0">
+                <!-- Cozy cafe atmosphere with customers enjoying coffee and conversation -->
+                <div class="absolute inset-0 bg-cover bg-center bg-no-repeat" style="background-image: url('https://images.unsplash.com/photo-1554118811-1e0d58224f24?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080');"></div>
+                <div class="absolute inset-0 bg-black/40"></div>
+                <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                    <h1 class="font-inter font-bold text-5xl md:text-7xl text-white mb-6">
+                        Let us take care of the rest.
+                    </h1>
+                    <p class="font-source text-xl md:text-2xl text-coffee-cream mb-8 max-w-2xl mx-auto">
+                        Your sanctuary for comfort, quality, and community
+                    </p>
+                    <a href="https://order.iteeha.coffee/" class="inline-block bg-coffee-gold text-white px-8 py-4 rounded-full font-inter font-semibold text-lg hover:bg-coffee-brown transition-all duration-300 transform hover:scale-105">
+                        Order Now
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Hero Navigation Dots -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-3">
+            <button class="hero-dot w-3 h-3 rounded-full bg-white/50 hover:bg-white transition-all duration-300" data-slide="0"></button>
+            <button class="hero-dot w-3 h-3 rounded-full bg-white/50 hover:bg-white transition-all duration-300" data-slide="1"></button>
+            <button class="hero-dot w-3 h-3 rounded-full bg-white/50 hover:bg-white transition-all duration-300" data-slide="2"></button>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: HeroCarousel -->
+
+    <!-- Our Story Section -->
+    <!-- @COMPONENT: StorySection [brand story with improved typography and layout] -->
+    <section id="story" class="py-20 bg-coffee-light">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="space-y-8">
+                    <div class="flex items-center space-x-4">
+                        <img src="https://iteeha.coffee/images/aboutiteeha.png" alt="About Iteeha" class="h-16 w-auto">
+                        <h2 class="font-inter font-bold text-4xl md:text-5xl text-coffee-brown">Our Story</h2>
+                    </div>
+                    
+                    <div class="prose prose-lg max-w-none">
+                        <p class="text-charcoal text-lg leading-relaxed mb-6">
+                            <span class="font-semibold text-coffee-brown">"Iteeha"</span> roughly translates to <em>'as per tradition'</em>, and keeping that in mind, we adopted the virtue of doing <strong>'Basic but Beautiful'</strong>. We offer light and simple products, but beautifully done.
+                        </p>
+                        
+                        <p class="text-charcoal text-lg leading-relaxed mb-6">
+                            We understand the importance of a well-made cup of coffee, and hence focus immensely on sourcing just the right beans, training our staff continually, and equipping our cafes with the best machines.
+                        </p>
+                        
+                        <p class="text-charcoal text-lg leading-relaxed mb-8">
+                            Tie that in with our warm service and you've got yourself an experience that will keep you coming back for more. Iteeha Coffee is a sanctuary for all those that are seeking a comforting cuppa and a moment to pause and reflect.
+                        </p>
+                    </div>
+                    
+                    <a href="https://iteeha.coffee/about.html" class="inline-flex items-center bg-coffee-brown text-white px-6 py-3 rounded-full font-inter font-medium hover:bg-coffee-dark transition-all duration-300 transform hover:scale-105">
+                        Learn More About Us
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+                
+                <div class="relative">
+                    <!-- Warm coffee shop interior showing the welcoming atmosphere -->
+                    <img src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600" alt="Cozy coffee shop interior" class="rounded-2xl shadow-2xl w-full h-auto">
+                    
+                    <!-- Floating Elements -->
+                    <div class="absolute -top-6 -right-6 bg-white rounded-2xl p-6 shadow-lg animate-float">
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-coffee text-coffee-gold text-2xl"></i>
+                            <div>
+                                <p class="font-inter font-semibold text-coffee-brown">Premium Quality</p>
+                                <p class="text-sm text-gray-600">Carefully sourced beans</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="absolute -bottom-6 -left-6 bg-coffee-brown rounded-2xl p-6 shadow-lg text-white" style="animation: float 3s ease-in-out infinite 1s;">
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-heart text-coffee-gold text-2xl"></i>
+                            <div>
+                                <p class="font-inter font-semibold">Warm Service</p>
+                                <p class="text-sm text-coffee-cream">From our heart to yours</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: StorySection -->
+
+    <!-- Gallery Section -->
+    <!-- @COMPONENT: GalleryGrid [masonry layout with lightbox functionality] -->
+    <section id="gallery" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-inter font-bold text-4xl md:text-5xl text-coffee-brown mb-6">Gallery</h2>
+                <p class="text-charcoal text-lg max-w-2xl mx-auto">
+                    Take a peek into our world of coffee craftsmanship, cozy atmosphere, and memorable moments
+                </p>
+            </div>
+            
+            <!-- Gallery Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <!-- @MAP: galleryImages.map(image => ( -->
+                
+                <!-- Gallery Item 1 -->
+                <div class="gallery-item aspect-square overflow-hidden rounded-xl cursor-pointer gallery-hover" data-image="https://iteeha.coffee/images/g9.jpg">
+                    <img src="https://iteeha.coffee/images/g9.jpg" alt="Gallery Image" class="w-full h-full object-cover">
+                </div>
+                
+                <!-- Gallery Item 2 -->
+                <div class="gallery-item aspect-[4/5] overflow-hidden rounded-xl cursor-pointer gallery-hover" data-image="https://iteeha.coffee/images/g12.jpg">
+                    <img src="https://iteeha.coffee/images/g12.jpg" alt="Gallery Image" class="w-full h-full object-cover">
+                </div>
+                
+                <!-- Gallery Item 3 -->
+                <div class="gallery-item aspect-square overflow-hidden rounded-xl cursor-pointer gallery-hover" data-image="https://iteeha.coffee/images/g10.jpg">
+                    <img src="https://iteeha.coffee/images/g10.jpg" alt="Gallery Image" class="w-full h-full object-cover">
+                </div>
+                
+                <!-- Gallery Item 4 -->
+                <div class="gallery-item aspect-[3/4] overflow-hidden rounded-xl cursor-pointer gallery-hover" data-image="https://iteeha.coffee/images/1.png">
+                    <img src="https://iteeha.coffee/images/1.png" alt="Gallery Image" class="w-full h-full object-cover">
+                </div>
+                
+                <!-- Gallery Item 5 -->
+                <div class="gallery-item aspect-square overflow-hidden rounded-xl cursor-pointer gallery-hover" data-image="https://iteeha.coffee/images/2.png">
+                    <img src="https://iteeha.coffee/images/2.png" alt="Gallery Image" class="w-full h-full object-cover">
+                </div>
+                
+                <!-- Gallery Item 6 -->
+                <div class="gallery-item aspect-[4/5] overflow-hidden rounded-xl cursor-pointer gallery-hover" data-image="https://iteeha.coffee/images/3.png">
+                    <img src="https://iteeha.coffee/images/3.png" alt="Gallery Image" class="w-full h-full object-cover">
+                </div>
+                
+                <!-- Gallery Item 7 -->
+                <div class="gallery-item aspect-square overflow-hidden rounded-xl cursor-pointer gallery-hover" data-image="https://iteeha.coffee/images/e7.jpg">
+                    <img src="https://iteeha.coffee/images/e7.jpg" alt="Gallery Image" class="w-full h-full object-cover">
+                </div>
+                
+                <!-- Gallery Item 8 -->
+                <div class="gallery-item aspect-[3/4] overflow-hidden rounded-xl cursor-pointer gallery-hover" data-image="https://iteeha.coffee/images/e12.jpg">
+                    <img src="https://iteeha.coffee/images/e12.jpg" alt="Gallery Image" class="w-full h-full object-cover">
+                </div>
+                
+                <!-- Gallery Item 9 -->
+                <div class="gallery-item aspect-square overflow-hidden rounded-xl cursor-pointer gallery-hover" data-image="https://iteeha.coffee/images/e8.jpg">
+                    <img src="https://iteeha.coffee/images/e8.jpg" alt="Gallery Image" class="w-full h-full object-cover">
+                </div>
+                
+                <!-- Gallery Item 10 -->
+                <div class="gallery-item aspect-[4/5] overflow-hidden rounded-xl cursor-pointer gallery-hover" data-image="https://iteeha.coffee/images/g1.jpg">
+                    <img src="https://iteeha.coffee/images/g1.jpg" alt="Gallery Image" class="w-full h-full object-cover">
+                </div>
+                
+                <!-- Gallery Item 11 -->
+                <div class="gallery-item aspect-square overflow-hidden rounded-xl cursor-pointer gallery-hover" data-image="https://iteeha.coffee/images/g6.jpg">
+                    <img src="https://iteeha.coffee/images/g6.jpg" alt="Gallery Image" class="w-full h-full object-cover">
+                </div>
+                
+                <!-- Gallery Item 12 -->
+                <div class="gallery-item aspect-[3/4] overflow-hidden rounded-xl cursor-pointer gallery-hover" data-image="https://iteeha.coffee/images/g2.jpg">
+                    <img src="https://iteeha.coffee/images/g2.jpg" alt="Gallery Image" class="w-full h-full object-cover">
+                </div>
+                
+                <!-- @END_MAP )) -->
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: GalleryGrid -->
+
+    <!-- Contact Section -->
+    <!-- @COMPONENT: ContactSection [contact information and location details] -->
+    <section id="contact" class="py-20 bg-coffee-light">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-inter font-bold text-4xl md:text-5xl text-coffee-brown mb-6">Visit Us</h2>
+                <p class="text-charcoal text-lg max-w-2xl mx-auto">
+                    Come experience the warmth of Iteeha Coffee. We're here to serve you the perfect cup.
+                </p>
+            </div>
+            
+            <div class="grid lg:grid-cols-3 gap-12">
+                <!-- Location -->
+                <div class="text-center">
+                    <div class="bg-coffee-brown text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-map-marker-alt text-2xl"></i>
+                    </div>
+                    <h3 class="font-inter font-semibold text-xl text-coffee-brown mb-3">Location</h3>
+                    <p class="text-charcoal" data-mock="true">
+                        123 Coffee Street<br>
+                        Downtown District<br>
+                        City, State 12345
+                    </p>
+                </div>
+                
+                <!-- Hours -->
+                <div class="text-center">
+                    <div class="bg-coffee-brown text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-clock text-2xl"></i>
+                    </div>
+                    <h3 class="font-inter font-semibold text-xl text-coffee-brown mb-3">Hours</h3>
+                    <p class="text-charcoal" data-mock="true">
+                        Monday - Friday: 7AM - 8PM<br>
+                        Saturday - Sunday: 8AM - 9PM<br>
+                        Holidays: 9AM - 6PM
+                    </p>
+                </div>
+                
+                <!-- Contact -->
+                <div class="text-center">
+                    <div class="bg-coffee-brown text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-phone text-2xl"></i>
+                    </div>
+                    <h3 class="font-inter font-semibold text-xl text-coffee-brown mb-3">Contact</h3>
+                    <p class="text-charcoal" data-mock="true">
+                        Phone: (555) 123-4567<br>
+                        Email: hello@iteeha.coffee<br>
+                        @iteehacoffee
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: ContactSection -->
+
+    <!-- Footer -->
+    <!-- @COMPONENT: Footer [site footer with links and branding] -->
+    <footer class="bg-coffee-dark text-coffee-cream py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="md:col-span-2">
+                    <div class="flex items-center mb-4">
+                        <img src="https://iteeha.coffee/images/vfx.png" alt="Iteeha Coffee Logo" class="h-8 w-auto">
+                        <span class="ml-2 font-inter font-bold text-xl text-coffee-gold">Iteeha Coffee</span>
+                    </div>
+                    <p class="text-coffee-cream/80 mb-6 max-w-md">
+                        A sanctuary for coffee lovers seeking comfort, quality, and community. Basic but beautiful, as per tradition.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-coffee-cream/60 hover:text-coffee-gold transition-colors duration-300">
+                            <i class="fab fa-facebook-f text-xl"></i>
+                        </a>
+                        <a href="#" class="text-coffee-cream/60 hover:text-coffee-gold transition-colors duration-300">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                        <a href="#" class="text-coffee-cream/60 hover:text-coffee-gold transition-colors duration-300">
+                            <i class="fab fa-twitter text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="font-inter font-semibold text-coffee-gold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-coffee-cream/80 hover:text-coffee-gold transition-colors duration-300">Home</a></li>
+                        <li><a href="#story" class="text-coffee-cream/80 hover:text-coffee-gold transition-colors duration-300">Our Story</a></li>
+                        <li><a href="#gallery" class="text-coffee-cream/80 hover:text-coffee-gold transition-colors duration-300">Gallery</a></li>
+                        <li><a href="https://iteeha.coffee/about.html" class="text-coffee-cream/80 hover:text-coffee-gold transition-colors duration-300">About Us</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-inter font-semibold text-coffee-gold mb-4">Order</h4>
+                    <ul class="space-y-2">
+                        <li><a href="https://order.iteeha.coffee/" class="text-coffee-cream/80 hover:text-coffee-gold transition-colors duration-300">Order Online</a></li>
+                        <li><a href="#contact" class="text-coffee-cream/80 hover:text-coffee-gold transition-colors duration-300">Visit Us</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-coffee-cream/20 mt-8 pt-8 text-center">
+                <p class="text-coffee-cream/60">
+                    &copy; 2024 Iteeha Coffee. All rights reserved. | Coffee. Craft. Conversations.
+                </p>
+            </div>
+        </div>
+    </footer>
+    <!-- @END_COMPONENT: Footer -->
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox justify-center items-center">
+        <span class="lightbox-close">&times;</span>
+        <img class="lightbox-content" id="lightbox-img">
+    </div>
+
+    <!-- Floating Order Button -->
+    <a href="https://order.iteeha.coffee/" class="fixed bottom-6 right-6 bg-coffee-gold text-white p-4 rounded-full shadow-lg hover:bg-coffee-brown transition-all duration-300 transform hover:scale-110 z-40 animate-float">
+        <i class="fas fa-coffee text-xl"></i>
+    </a>
+
+    <script>
+        (function() {
+            // Mobile Menu Toggle
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            mobileMenuBtn?.addEventListener('click', () => {
+                mobileMenu?.classList.toggle('hidden');
+            });
+            
+            // Hero Slider
+            let currentSlide = 0;
+            const slides = document.querySelectorAll('.hero-slide');
+            const dots = document.querySelectorAll('.hero-dot');
+            
+            function showSlide(index) {
+                slides.forEach((slide, i) => {
+                    slide.style.opacity = i === index ? '1' : '0';
+                });
+                dots.forEach((dot, i) => {
+                    dot.style.backgroundColor = i === index ? 'white' : 'rgba(255, 255, 255, 0.5)';
+                });
+            }
+            
+            function nextSlide() {
+                currentSlide = (currentSlide + 1) % slides.length;
+                showSlide(currentSlide);
+            }
+            
+            // Auto-play slider
+            setInterval(nextSlide, 5000);
+            
+            // Dot navigation
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    currentSlide = index;
+                    showSlide(currentSlide);
+                });
+            });
+            
+            // Initialize first slide
+            showSlide(0);
+            
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+            
+            // Lightbox functionality
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            const lightboxClose = document.querySelector('.lightbox-close');
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            
+            galleryItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const imageSrc = this.getAttribute('data-image');
+                    lightboxImg.src = imageSrc;
+                    lightbox.classList.add('show');
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+            
+            function closeLightbox() {
+                lightbox.classList.remove('show');
+                document.body.style.overflow = 'auto';
+            }
+            
+            lightboxClose?.addEventListener('click', closeLightbox);
+            lightbox?.addEventListener('click', function(e) {
+                if (e.target === lightbox) {
+                    closeLightbox();
+                }
+            });
+            
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && lightbox.classList.contains('show')) {
+                    closeLightbox();
+                }
+            });
+            
+            // Scroll animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animation = 'fadeIn 1s ease-out forwards';
+                    }
+                });
+            }, observerOptions);
+            
+            // Observe sections for animations
+            document.querySelectorAll('section').forEach(section => {
+                observer.observe(section);
+            });
+            
+        })();
+    </script>
+    
+    <!-- @STATE: currentSlide:number = 0 -->
+    <!-- @STATE: isMobileMenuOpen:boolean = false -->
+    <!-- @STATE: isLightboxOpen:boolean = false -->
+    <!-- @STATE: currentLightboxImage:string = '' -->
+    
+    <!-- @FUNCTIONALITY: Hero slider should auto-advance every 5 seconds with smooth transitions -->
+    <!-- @FUNCTIONALITY: Gallery lightbox should support keyboard navigation (ESC to close, arrow keys for next/prev) -->
+    <!-- @FUNCTIONALITY: Smooth scrolling should work for all internal anchor links -->
+    <!-- @FUNCTIONALITY: Mobile menu should close when clicking outside or on a nav link -->
+</body>
+</html>
