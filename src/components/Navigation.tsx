@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu, Bean, Croissant, Leaf } from "lucide-react";
-import FaviconIcon from "@/assets/favicon.png"; // adjust path if needed
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
@@ -32,7 +31,7 @@ export default function Navigation() {
           <div className="flex-shrink-0 flex items-center group">
             <div className="flex items-center mr-3 cursor-pointer" onClick={() => alert('☕ Welcome to Iteeha Coffee Verse! ✨')}>
             <img 
-              src="/assets/favicon.png"   // or {FaviconIcon} if imported from src/assets
+              src="https://iteeha.coffee/images/iteeha%20logo.png"   // or {FaviconIcon} if imported from src/assets
               alt="Iteeha Logo"
               className="h-16 w-auto"     // keeps full proportion, no crop
             />
