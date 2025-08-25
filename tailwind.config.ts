@@ -14,6 +14,17 @@ export default {
         caramel: "var(--caramel)",
         foam: "var(--foam)",
         border: "var(--latte)", // Add border color definition
+        // Coffee theme colors for compatibility
+        'coffee-dark': '#2C1810',
+        'coffee-brown': '#4B3621',
+        'coffee-light': '#F7F4F1',
+        'coffee-gold': '#D4A574',
+        'coffee-cream': '#F0E6D3',
+        'charcoal': '#666666',
+        // Modern accent colors
+        'warm-peach': '#FFB5A7',
+        'soft-rose': '#F4C2C2',
+        'mint-green': '#96CEB4',
       },
       borderRadius: {
         lg: "var(--radius)",

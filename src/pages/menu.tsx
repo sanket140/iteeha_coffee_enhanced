@@ -39,25 +39,42 @@ export default function Menu() {
     { name: "Artisanal Lemonade", price: 150, description: "Fresh lemon with a hint of herbs" },
   ];
 
-  const MenuSection = ({ title, items, testId }: { title: string; items: typeof coffeeItems; testId: string }) => (
+  const MenuSection = ({ title, items, testId, bgImage }: { title: string; items: typeof coffeeItems; testId: string; bgImage: string }) => (
     <div className="mb-16" data-testid={testId}>
-      <h2 className="font-inter font-bold text-3xl text-coffee-brown mb-8 text-center">
-        {title}
-      </h2>
+      <div className="flex items-center justify-center mb-8">
+        <div className="w-16 h-16 rounded-full bg-gradient-to-br from-caramel to-espresso flex items-center justify-center mr-4 animate-float">
+          <img src={bgImage} alt={title} className="w-10 h-10 object-contain filter brightness-0 invert" />
+        </div>
+        <h2 className="font-display font-bold text-4xl text-espresso">
+          {title}
+        </h2>
+      </div>
       <div className="grid md:grid-cols-2 gap-6">
         {items.map((item, index) => (
-          <div key={index} className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow" data-testid={`menu-item-${index}`}>
+          <div key={index} className="coffee-card hover:shadow-xl hover:scale-[1.02] transition-all duration-300 group" data-testid={`menu-item-${index}`}>
             <div className="flex justify-between items-start mb-3">
-              <h3 className="font-inter font-semibold text-xl text-coffee-brown pr-4">
+              <h3 className="font-heading font-semibold text-xl text-espresso pr-4 group-hover:text-caramel transition-colors">
                 {item.name}
               </h3>
-              <span className="text-2xl font-bold text-coffee-gold flex-shrink-0">
+              <span className="text-2xl font-bold text-caramel flex-shrink-0 animate-pulse">
                 ₹{item.price}
               </span>
             </div>
-            <p className="text-charcoal leading-relaxed">
+            <p className="text-charcoal leading-relaxed group-hover:text-espresso transition-colors">
               {item.description}
             </p>
+            <div className="mt-4 pt-4 border-t border-latte">
+              <div className="flex justify-between items-center">
+                <span className="text-sm text-sage font-medium">Fresh • Made to Order</span>
+                <div className="flex space-x-1">
+                  {[...Array(5)].map((_, i) => (
+                    <svg key={i} className="w-4 h-4 text-caramel" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
         ))}
       </div>
@@ -72,24 +89,34 @@ export default function Menu() {
       <Navigation />
       
       {/* Hero Section */}
-      <section className="pt-24 pb-16 bg-coffee-light" data-testid="menu-hero">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="pt-24 pb-16 bg-gradient-to-br from-latte via-cream to-foam relative overflow-hidden" data-testid="menu-hero">
+        <div className="absolute inset-0 doodle-bg opacity-20"></div>
+        <div className="absolute top-10 left-10 w-32 h-32 bg-caramel rounded-full opacity-10 animate-bounce"></div>
+        <div className="absolute bottom-10 right-10 w-48 h-48 bg-sage rounded-full opacity-10 animate-float"></div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="text-center">
-            <h1 className="font-inter font-bold text-5xl md:text-6xl text-coffee-brown mb-6" data-testid="menu-hero-title">
+            <div className="mb-8">
+              <img 
+                src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=120&h=120&fit=crop&crop=center" 
+                alt="Coffee beans" 
+                className="w-24 h-24 rounded-full mx-auto mb-4 border-4 border-caramel animate-wiggle"
+              />
+            </div>
+            <h1 className="font-display font-bold text-6xl md:text-7xl text-espresso mb-6 text-shadow" data-testid="menu-hero-title">
               Our Menu
             </h1>
-            <p className="text-xl text-charcoal max-w-3xl mx-auto mb-8" data-testid="menu-hero-subtitle">
+            <p className="text-xl text-espresso max-w-3xl mx-auto mb-8 font-heading" data-testid="menu-hero-subtitle">
               Thoughtfully curated coffee, bakes, artisanal teas, and premium sandwiches - Basic but Beautiful
             </p>
-            <div className="flex justify-center items-center space-x-8 text-coffee-brown">
+            <div className="flex justify-center items-center space-x-8 text-espresso bg-white/70 backdrop-blur-sm rounded-2xl p-6 max-w-2xl mx-auto">
               <div className="text-center">
-                <div className="text-2xl font-bold">₹500-1050</div>
-                <div className="text-sm">Cost for Two</div>
+                <div className="text-3xl font-bold text-caramel">₹500-1050</div>
+                <div className="text-sm font-medium">Cost for Two</div>
               </div>
-              <div className="w-px h-12 bg-coffee-brown/30"></div>
+              <div className="w-px h-12 bg-espresso/30"></div>
               <div className="text-center">
-                <div className="text-2xl font-bold">7:30 AM - 11:30 PM</div>
-                <div className="text-sm">All Days</div>
+                <div className="text-3xl font-bold text-caramel">7:30 AM - 11:30 PM</div>
+                <div className="text-sm font-medium">All Days</div>
               </div>
             </div>
           </div>
@@ -100,13 +127,33 @@ export default function Menu() {
       <section className="py-20 bg-coffee-light" data-testid="menu-sections">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
-          <MenuSection title="Coffee & Espresso" items={coffeeItems} testId="menu-coffee" />
+          <MenuSection 
+            title="Coffee & Espresso" 
+            items={coffeeItems} 
+            testId="menu-coffee" 
+            bgImage="https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=64&h=64&fit=crop&crop=center"
+          />
           
-          <MenuSection title="Food & Bakes" items={foodItems} testId="menu-food" />
+          <MenuSection 
+            title="Food & Bakes" 
+            items={foodItems} 
+            testId="menu-food" 
+            bgImage="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=64&h=64&fit=crop&crop=center"
+          />
           
-          <MenuSection title="Artisanal Teas" items={teaItems} testId="menu-tea" />
+          <MenuSection 
+            title="Artisanal Teas" 
+            items={teaItems} 
+            testId="menu-tea" 
+            bgImage="https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=64&h=64&fit=crop&crop=center"
+          />
           
-          <MenuSection title="Other Beverages" items={beverageItems} testId="menu-beverages" />
+          <MenuSection 
+            title="Other Beverages" 
+            items={beverageItems} 
+            testId="menu-beverages" 
+            bgImage="https://images.unsplash.com/photo-1544145945-f90425340c7e?w=64&h=64&fit=crop&crop=center"
+          />
 
         </div>
       </section>

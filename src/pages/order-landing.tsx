@@ -19,7 +19,7 @@ export default function OrderLanding() {
   const handleCurrentLocation = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
-        (position) => {
+        () => {
           // For demo purposes, set a Mumbai location
           setLocation("Mahalaxmi Temple, 26/A, Mahalaxmi West, Central West");
           setTimeout(() => {
@@ -42,16 +42,36 @@ export default function OrderLanding() {
       <Navigation />
       
       {/* Header */}
-      <section className="pt-24 pb-12 bg-white" data-testid="order-landing-header">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <img 
-            src="https://iteeha.coffee/images/vfx.png" 
-            alt="Iteeha Coffee" 
-            className="h-16 w-auto mx-auto mb-8"
-          />
-          <h1 className="font-inter font-bold text-4xl md:text-5xl text-coffee-brown mb-4" data-testid="order-landing-title">
+      <section className="pt-24 pb-12 bg-gradient-to-br from-cream via-latte to-foam relative overflow-hidden" data-testid="order-landing-header">
+        <div className="absolute inset-0 doodle-bg opacity-30"></div>
+        <div className="absolute top-20 left-20 w-20 h-20 bg-blush rounded-full opacity-20 animate-bounce" style={{animationDelay: '0.5s'}}></div>
+        <div className="absolute top-32 right-32 w-16 h-16 bg-sage rounded-full opacity-20 animate-float" style={{animationDelay: '1s'}}></div>
+        <div className="absolute bottom-20 left-32 w-12 h-12 bg-caramel rounded-full opacity-20 animate-wiggle"></div>
+        
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative">
+          <div className="mb-8">
+            <div className="relative inline-block">
+              <img 
+                src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=120&h=120&fit=crop&crop=center" 
+                alt="Coffee cup" 
+                className="h-20 w-20 rounded-full mx-auto mb-4 border-4 border-caramel animate-float shadow-lg"
+              />
+              <div className="absolute -top-2 -right-2 w-8 h-8 bg-caramel rounded-full flex items-center justify-center animate-bounce">
+                <span className="text-white text-xs font-bold">☕</span>
+              </div>
+            </div>
+            <img 
+              src="https://iteeha.coffee/images/vfx.png" 
+              alt="Iteeha Coffee" 
+              className="h-16 w-auto mx-auto"
+            />
+          </div>
+          <h1 className="font-display font-bold text-5xl md:text-6xl text-espresso mb-4 text-shadow" data-testid="order-landing-title">
             Let's get ordering
           </h1>
+          <p className="text-lg text-espresso/80 mb-8 font-sans max-w-2xl mx-auto">
+            Craving something delicious? Let us bring the finest coffee and treats right to your doorstep.
+          </p>
           
           {/* Delivery/Pickup Toggle */}
           <div className="flex justify-center mb-12">
@@ -84,29 +104,45 @@ export default function OrderLanding() {
       </section>
 
       {/* Location Selection */}
-      <section className="py-12 bg-coffee-light" data-testid="location-selection">
-        <div className="max-w-md mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-white rounded-xl p-8 shadow-lg">
+      <section className="py-12 bg-gradient-to-b from-latte to-cream relative" data-testid="location-selection">
+        <div className="absolute inset-0 doodle-bg opacity-30"></div>
+        <div className="max-w-md mx-auto px-4 sm:px-6 lg:px-8 relative">
+          <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-caramel/20 hover:shadow-2xl transition-all duration-300">
+            <div className="text-center mb-6">
+              <div className="w-16 h-16 bg-gradient-to-br from-caramel to-espresso rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse">
+                <MapPin className="w-8 h-8 text-white" />
+              </div>
+              <h2 className="font-display text-2xl text-espresso mb-2">Where would you like your order?</h2>
+              <p className="text-sm text-espresso/70">We'll deliver fresh and hot to your location</p>
+            </div>
+            
             <Button
               onClick={handleCurrentLocation}
               variant="outline"
-              className="w-full mb-4 py-6 text-left justify-start border-coffee-brown text-coffee-brown hover:bg-coffee-light"
+              className="w-full mb-4 py-6 text-left justify-start border-caramel text-espresso hover:bg-caramel/10 hover:border-espresso transition-all duration-300 group"
               data-testid="current-location-button"
             >
-              <MapPin className="w-5 h-5 mr-3" />
-              Use my current location
+              <MapPin className="w-5 h-5 mr-3 group-hover:animate-bounce" />
+              <span className="font-medium">Use my current location</span>
             </Button>
             
-            <div className="text-center text-gray-500 mb-4 font-medium">OR</div>
+            <div className="relative mb-4">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-espresso/20"></div>
+              </div>
+              <div className="relative flex justify-center text-sm">
+                <span className="px-4 bg-white text-espresso/60 font-medium">or enter manually</span>
+              </div>
+            </div>
             
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-espresso/40 w-5 h-5" />
               <Input
                 type="text"
-                placeholder="Search street, locality..."
+                placeholder="Search street, locality, area..."
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
-                className="pl-10 py-6 text-lg border-coffee-brown/20 focus:border-coffee-brown"
+                className="pl-12 py-6 text-lg border-caramel/30 focus:border-caramel rounded-xl bg-white/70 backdrop-blur-sm"
                 data-testid="location-input"
                 onKeyPress={(e) => e.key === 'Enter' && handleLocationSubmit()}
               />
@@ -115,10 +151,10 @@ export default function OrderLanding() {
             {location && (
               <Button
                 onClick={handleLocationSubmit}
-                className="w-full mt-4 py-6 bg-coffee-brown hover:bg-coffee-dark text-white text-lg"
+                className="w-full mt-6 py-6 bg-gradient-to-r from-caramel to-espresso hover:from-espresso hover:to-caramel text-white text-lg font-medium rounded-xl transform hover:scale-[1.02] transition-all duration-300 shadow-lg hover:shadow-xl"
                 data-testid="continue-button"
               >
-                Continue to Menu
+                Continue to Menu →
               </Button>
             )}
           </div>
@@ -126,46 +162,85 @@ export default function OrderLanding() {
       </section>
 
       {/* How it Works */}
-      <section className="py-20 bg-white" data-testid="how-it-works">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-20 bg-gradient-to-br from-foam via-cream to-latte relative overflow-hidden" data-testid="how-it-works">
+        <div className="absolute inset-0 doodle-bg opacity-20"></div>
+        <div className="absolute top-10 right-10 w-40 h-40 bg-sage rounded-full opacity-10 animate-float"></div>
+        <div className="absolute bottom-10 left-10 w-32 h-32 bg-blush rounded-full opacity-10 animate-bounce"></div>
+        
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+          <div className="text-center mb-16">
+            <h2 className="font-display text-5xl font-bold text-espresso mb-4">How it works</h2>
+            <p className="text-xl text-espresso/70 font-sans">Simple steps to satisfy your cravings</p>
+          </div>
+          
           <div className="grid md:grid-cols-3 gap-12">
             
             {/* Step 1 */}
-            <div className="text-center" data-testid="step-location">
-              <div className="bg-coffee-brown rounded-2xl p-8 mb-6 mx-auto w-32 h-32 flex items-center justify-center">
-                <MapPin className="w-16 h-16 text-white" />
+            <div className="text-center group" data-testid="step-location">
+              <div className="relative mb-8">
+                <div className="bg-gradient-to-br from-caramel to-espresso rounded-3xl p-8 mx-auto w-36 h-36 flex items-center justify-center shadow-xl group-hover:shadow-2xl transition-all duration-300 transform group-hover:scale-110 group-hover:-rotate-3">
+                  <MapPin className="w-16 h-16 text-white group-hover:animate-bounce" />
+                </div>
+                <div className="absolute -top-2 -right-2 w-8 h-8 bg-blush rounded-full flex items-center justify-center text-espresso font-bold text-sm animate-pulse">
+                  1
+                </div>
+                <img 
+                  src="https://images.unsplash.com/photo-1524850011238-e3d235c7d4c9?w=80&h=80&fit=crop&crop=center" 
+                  alt="Location pin" 
+                  className="absolute -bottom-4 -left-4 w-16 h-16 rounded-full border-4 border-white shadow-lg opacity-80"
+                />
               </div>
-              <h3 className="font-inter font-bold text-xl text-coffee-brown mb-4">
+              <h3 className="font-heading font-bold text-2xl text-espresso mb-4 group-hover:text-caramel transition-colors">
                 Set your location
               </h3>
-              <p className="text-gray-600 leading-relaxed">
-                Tell us where you want to get your items delivered
+              <p className="text-espresso/70 leading-relaxed text-lg">
+                Tell us where you want to get your items delivered with precision
               </p>
             </div>
             
             {/* Step 2 */}
-            <div className="text-center" data-testid="step-choose">
-              <div className="bg-coffee-brown rounded-2xl p-8 mb-6 mx-auto w-32 h-32 flex items-center justify-center">
-                <Package className="w-16 h-16 text-white" />
+            <div className="text-center group" data-testid="step-choose">
+              <div className="relative mb-8">
+                <div className="bg-gradient-to-br from-sage to-espresso rounded-3xl p-8 mx-auto w-36 h-36 flex items-center justify-center shadow-xl group-hover:shadow-2xl transition-all duration-300 transform group-hover:scale-110 group-hover:rotate-3">
+                  <Package className="w-16 h-16 text-white group-hover:animate-wiggle" />
+                </div>
+                <div className="absolute -top-2 -right-2 w-8 h-8 bg-blush rounded-full flex items-center justify-center text-espresso font-bold text-sm animate-pulse" style={{animationDelay: '0.3s'}}>
+                  2
+                </div>
+                <img 
+                  src="https://images.unsplash.com/photo-1511920170033-f8396924c348?w=80&h=80&fit=crop&crop=center" 
+                  alt="Coffee selection" 
+                  className="absolute -bottom-4 -right-4 w-16 h-16 rounded-full border-4 border-white shadow-lg opacity-80"
+                />
               </div>
-              <h3 className="font-inter font-bold text-xl text-coffee-brown mb-4">
+              <h3 className="font-heading font-bold text-2xl text-espresso mb-4 group-hover:text-sage transition-colors">
                 Choose your items
               </h3>
-              <p className="text-gray-600 leading-relaxed">
-                Add the items you want in your cart
+              <p className="text-espresso/70 leading-relaxed text-lg">
+                Browse our curated menu and add your favorite treats to cart
               </p>
             </div>
             
             {/* Step 3 */}
-            <div className="text-center" data-testid="step-delivery">
-              <div className="bg-coffee-brown rounded-2xl p-8 mb-6 mx-auto w-32 h-32 flex items-center justify-center">
-                <Truck className="w-16 h-16 text-white" />
+            <div className="text-center group" data-testid="step-delivery">
+              <div className="relative mb-8">
+                <div className="bg-gradient-to-br from-blush to-espresso rounded-3xl p-8 mx-auto w-36 h-36 flex items-center justify-center shadow-xl group-hover:shadow-2xl transition-all duration-300 transform group-hover:scale-110 group-hover:-rotate-3">
+                  <Truck className="w-16 h-16 text-white group-hover:animate-bounce" />
+                </div>
+                <div className="absolute -top-2 -right-2 w-8 h-8 bg-blush rounded-full flex items-center justify-center text-espresso font-bold text-sm animate-pulse" style={{animationDelay: '0.6s'}}>
+                  3
+                </div>
+                <img 
+                  src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=80&h=80&fit=crop&crop=center" 
+                  alt="Delivery" 
+                  className="absolute -bottom-4 -left-4 w-16 h-16 rounded-full border-4 border-white shadow-lg opacity-80"
+                />
               </div>
-              <h3 className="font-inter font-bold text-xl text-coffee-brown mb-4">
-                Have it delivered instantly
+              <h3 className="font-heading font-bold text-2xl text-espresso mb-4 group-hover:text-blush transition-colors">
+                Enjoy fresh delivery
               </h3>
-              <p className="text-gray-600 leading-relaxed">
-                Our delivery partners will deliver your order at your doorstep
+              <p className="text-espresso/70 leading-relaxed text-lg">
+                Sit back and relax while we deliver hot, fresh items to your doorstep
               </p>
             </div>
           </div>
