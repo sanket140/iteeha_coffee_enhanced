@@ -32,6 +32,34 @@ export default function HeroCarousel() {
       subtitle: "Your perfect brew awaits",
       isLogo: false,
     },
+    {
+      id: 4,
+      image: "/attached_assets/generated_images/Cozy_coffee_shop_interior_6aa64c84.png",
+      title: "Where comfort meets coffee",
+      subtitle: "Your home away from home",
+      isLogo: false,
+    },
+    {
+      id: 5,
+      image: "/attached_assets/generated_images/Barista_creating_latte_art_552d5eda.png",
+      title: "Crafted with passion",
+      subtitle: "Every cup tells our story",
+      isLogo: false,
+    },
+    {
+      id: 6,
+      image: "/attached_assets/generated_images/Coffee_roasting_process_2c088205.png",
+      title: "From bean to bliss",
+      subtitle: "Freshly roasted perfection",
+      isLogo: false,
+    },
+    {
+      id: 7,
+      image: "/attached_assets/generated_images/Outdoor_coffee_patio_96e88291.png",
+      title: "Nature's embrace",
+      subtitle: "Coffee under the open sky",
+      isLogo: false,
+    },
   ];
 
   return (
