@@ -16,7 +16,7 @@ export default function Navigation() {
             </div>
             <span className="font-display font-bold text-3xl text-espresso" 
                   style={{ textShadow: "2px 2px 0px rgba(155, 109, 80, 0.2)" }}>
-              Brewtiful
+              Iteeha
             </span>
           </div>
           

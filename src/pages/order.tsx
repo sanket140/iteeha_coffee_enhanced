@@ -15,6 +15,7 @@ interface MenuItem {
   description: string;
   isVeg: boolean;
   category: string;
+  image: string;
   customizable?: boolean;
   milkOptions?: { name: string; price: number }[];
 }
@@ -57,6 +58,7 @@ export default function Order() {
       description: "A Smooth Blend Of Matcha And Steamed Milk",
       isVeg: true,
       category: "Matcha Specials",
+      image: "https://images.unsplash.com/photo-1515823064-d6e0c04616a7?w=300&h=200&fit=crop&crop=center",
       customizable: true,
       milkOptions: [
         { name: "Regular Milk", price: 0 },
@@ -71,6 +73,7 @@ export default function Order() {
       description: "Matcha And Steamed Milk With House Made Ginger Syrup",
       isVeg: true,
       category: "Matcha Specials",
+      image: "https://images.unsplash.com/photo-1497935586351-b67a49e012bf?w=300&h=200&fit=crop&crop=center",
       customizable: true,
       milkOptions: [
         { name: "Regular Milk", price: 0 },
@@ -85,6 +88,7 @@ export default function Order() {
       description: "Matcha And Milk With Blueberry Compote",
       isVeg: true,
       category: "Matcha Specials",
+      image: "https://images.unsplash.com/photo-1570197788417-0e82375c9371?w=300&h=200&fit=crop&crop=center",
       customizable: true,
       milkOptions: [
         { name: "Regular Milk", price: 0 },
@@ -99,6 +103,7 @@ export default function Order() {
       description: "Classic Matcha And Milk Over Ice",
       isVeg: true,
       category: "Matcha Specials",
+      image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=300&h=200&fit=crop&crop=center",
       customizable: true,
       milkOptions: [
         { name: "Regular Milk", price: 0 },
@@ -113,6 +118,7 @@ export default function Order() {
       description: "Matcha with turmeric and steamed milk",
       isVeg: true,
       category: "Matcha Specials",
+      image: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=300&h=200&fit=crop&crop=center",
       customizable: true,
       milkOptions: [
         { name: "Regular Milk", price: 0 },
@@ -127,6 +133,7 @@ export default function Order() {
       description: "Matcha with vanilla syrup and steamed milk",
       isVeg: true,
       category: "Matcha Specials",
+      image: "https://gratefulgrazer.com/wp-content/uploads/2022/01/Vanilla-Matcha-Latte-60.jpg",
       customizable: true,
       milkOptions: [
         { name: "Regular Milk", price: 0 },
@@ -141,7 +148,8 @@ export default function Order() {
       price: 160,
       description: "Rich, bold, and concentrated coffee shot",
       isVeg: true,
-      category: "Hot Beverages"
+      category: "Hot Beverages",
+      image: "https://images.unsplash.com/photo-1510707577719-ae7c14805e3a?w=300&h=200&fit=crop&crop=center"
     },
     {
       id: "coffee-2",
@@ -149,7 +157,8 @@ export default function Order() {
       price: 180,
       description: "Espresso diluted with hot water",
       isVeg: true,
-      category: "Hot Beverages"
+      category: "Hot Beverages",
+      image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=300&h=200&fit=crop&crop=center"
     },
     {
       id: "coffee-3",
@@ -158,6 +167,7 @@ export default function Order() {
       description: "Smooth espresso with steamed milk",
       isVeg: true,
       category: "Hot Beverages",
+      image: "https://images.unsplash.com/photo-1561047029-3000c68339ca?w=300&h=200&fit=crop&crop=center",
       customizable: true,
       milkOptions: [
         { name: "Regular Milk", price: 0 },
@@ -172,7 +182,8 @@ export default function Order() {
       price: 330,
       description: "Tender spiced chicken with fresh vegetables",
       isVeg: false,
-      category: "Sandwiches"
+      category: "Sandwiches",
+      image: "https://www.sugarspicenmore.com/wp-content/uploads/2023/03/Chicken-Sandwiches-2-rotated.jpg"
     },
     {
       id: "sandwich-2",
@@ -180,7 +191,8 @@ export default function Order() {
       price: 350,
       description: "Grilled vegetables with house-made pesto",
       isVeg: true,
-      category: "Sandwiches"
+      category: "Sandwiches",
+      image: "https://images.unsplash.com/photo-1481070555726-e2fe8357725c?w=300&h=200&fit=crop&crop=center"
     }
   ];
 
@@ -323,29 +335,35 @@ export default function Order() {
                   {selectedCategory}
                 </h2>
                 
-                <div className="space-y-6">
+                <div className="grid md:grid-cols-2 gap-6">
                   {filteredItems.map((item) => (
-                    <div key={item.id} className="border-b border-gray-100 pb-6 last:border-b-0" data-testid={`menu-item-${item.id}`}>
-                      <div className="flex justify-between items-start">
-                        <div className="flex-1">
-                          <div className="flex items-center space-x-2 mb-2">
-                            {item.isVeg && <Badge variant="secondary" className="bg-green-100 text-green-800">●</Badge>}
-                            <h3 className="font-inter font-semibold text-lg text-coffee-brown">
-                              {item.name}
-                            </h3>
-                          </div>
-                          <p className="text-gray-600 text-sm mb-3">{item.description}</p>
-                          <div className="flex items-center justify-between">
-                            <span className="font-bold text-lg text-coffee-brown">₹{item.price}</span>
-                            <Button 
-                              onClick={() => item.customizable ? openItemModal(item) : addToCart()}
-                              className="bg-coffee-brown hover:bg-coffee-dark text-white"
-                              data-testid={`add-${item.id}`}
-                            >
-                              ADD
-                            </Button>
-                          </div>
+                    <div key={item.id} className="bg-white rounded-xl shadow-lg border hover:shadow-xl transition-all duration-300 overflow-hidden group" data-testid={`menu-item-${item.id}`}>
+                      <div className="relative h-48 overflow-hidden">
+                        <img 
+                          src={item.image} 
+                          alt={item.name}
+                          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                        <div className="absolute top-4 left-4">
+                          {item.isVeg && <Badge variant="secondary" className="bg-green-100 text-green-800 border-2 border-white">●</Badge>}
                         </div>
+                        <div className="absolute top-4 right-4 bg-caramel text-white px-3 py-1 rounded-full font-bold text-lg">
+                          ₹{item.price}
+                        </div>
+                      </div>
+                      <div className="p-6">
+                        <h3 className="font-heading font-semibold text-xl text-espresso mb-2 group-hover:text-caramel transition-colors">
+                          {item.name}
+                        </h3>
+                        <p className="text-charcoal text-sm mb-4 leading-relaxed">{item.description}</p>
+                        <Button 
+                          onClick={() => item.customizable ? openItemModal(item) : addToCart()}
+                          className="w-full bg-gradient-to-r from-caramel to-espresso hover:from-espresso hover:to-caramel text-white font-medium py-3 rounded-xl transition-all duration-300 transform hover:scale-[1.02]"
+                          data-testid={`add-${item.id}`}
+                        >
+                          ADD TO CART
+                        </Button>
                       </div>
                     </div>
                   ))}

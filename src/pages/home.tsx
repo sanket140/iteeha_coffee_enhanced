@@ -144,7 +144,7 @@ export default function Home() {
               Our <span className="text-caramel">Story</span>
             </h2>
             <p className="text-lg text-espresso/80 mb-6">
-              Brewtiful began as a dream between two friends who believed coffee should be an experience, 
+              Iteeha began as a dream between two friends who believed coffee should be an experience, 
               not just a caffeine fix. We source ethically, roast locally, and pour passionately.
             </p>
             <p className="text-lg text-espresso/80 mb-8">
