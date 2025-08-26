@@ -336,7 +336,7 @@ export default function Home() {
           </div>
           
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="magical-card p-8 text-center group cursor-pointer magical-hover" onClick={() => alert('✨ Sarah says: "Every day here is a coffee adventure!" ☕')}>
+            <div className="magical-card p-8 text-center group cursor-pointer magical-hover" >
               <div className="text-6xl mb-4 animate-bounce coffee-bean-bounce">🙋‍♀️</div>
               <blockquote className="text-deep-coffee-brown font-subheading italic mb-4 playful-text text-lg">
                 "This place feels like stepping into a coffee wonderland! Every sip is pure magic."
@@ -345,7 +345,7 @@ export default function Home() {
               <div className="text-sm text-mint-green font-playful">Coffee Enthusiast ✨</div>
             </div>
             
-            <div className="magical-card p-8 text-center group cursor-pointer magical-hover" onClick={() => alert('🧙‍♂️ Rahul says: "The coffee here casts the perfect spell!" ⚡')} style={{animationDelay: '0.2s'}}>
+            <div className="magical-card p-8 text-center group cursor-pointer magical-hover" >
               <div className="text-6xl mb-4 animate-bounce coffee-bean-bounce" style={{animationDelay: '0.5s'}}>🧙‍♂️</div>
               <blockquote className="text-deep-coffee-brown font-subheading italic mb-4 playful-text text-lg">
                 "The atmosphere here is absolutely enchanting. It's my daily dose of happiness!"
@@ -354,7 +354,7 @@ export default function Home() {
               <div className="text-sm text-mint-green font-playful">Regular Visitor ⭐</div>
             </div>
             
-            <div className="magical-card p-8 text-center group cursor-pointer magical-hover" onClick={() => alert('👩‍💼 Priya says: "Best coffee meetings happen here!" 💼☕')} style={{animationDelay: '0.4s'}}>
+            <div className="magical-card p-8 text-center group cursor-pointer magical-hover" >
               <div className="text-6xl mb-4 animate-bounce coffee-bean-bounce" style={{animationDelay: '1s'}}>👩‍💼</div>
               <blockquote className="text-deep-coffee-brown font-subheading italic mb-4 playful-text text-lg">
                 "Perfect blend of tradition and innovation. Every visit feels like discovering something new!"

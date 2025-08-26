@@ -102,9 +102,7 @@ export default function CoffeeVerseEffects() {
       ))}
 
       {/* Interactive Coffee Pet */}
-      <div className="coffee-pet" onClick={handlePetClick}>
-        🐕
-      </div>
+     
 
       {/* Pet Message */}
       {petMessage && (
